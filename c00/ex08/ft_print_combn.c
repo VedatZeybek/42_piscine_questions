@@ -55,14 +55,18 @@ void ft_putchar(char c)
 void ft_print_combn(int n)
 {
     char num[10];
-    int i;
+    int i = 0;
 
     if (n <= 0 || n >= 10)
         return;
 
     // İlk n rakamını doldur (0, 1, 2, ..., n-1)
-    for (i = 0; i < n; i++)
+
+    while (i < n)
+    {
         num[i] = '0' + i;
+        i++;
+    }
 
     while (1)
     {
