@@ -59,16 +59,49 @@ char **ft_split(char *str)
     i = 0;
     while (*str)
     {
-        while (*str && is_space(str))
+        while (*str && is_space(*str))
             str++;
-        if (*str && !(is_space(str)))
+        if (*str && !(is_space(*str)))
         {
             result[i] = malloc_word(str);
             i++;
-            while (*str && !(is_space(str)))
+            while (*str && !(is_space(*str)))
                 str++;
         }
     }
     result[i] = NULL;
     return (result);
+}
+
+#include <stdio.h>
+
+void print_split(char **split)
+{
+    int i = 0;
+    while (split[i])
+    {
+        printf("split[%d]: %s\n", i, split[i]);
+        i++;
+    }
+}
+int main()
+{
+    char *str = "Merhaba dünya bu bir test";
+    char **result = ft_split(str);
+
+    if (!result)
+    {
+        printf("Bellek tahsis hatasi!\n");
+        return (1);
+    }
+
+    print_split(result);
+
+    // Belleği serbest bırakmayı unutma
+    int i = 0;
+    while (result[i])
+        free(result[i++]);
+    free(result);
+
+    return 0;
 }
